@@ -1,20 +1,22 @@
-name: Hello CI 
+name: Hello CI             # ワークフロー表示名
 
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - main               # main ブランチへの push で起動
+  pull_request:            # PR の作成・更新でも起動
 
 jobs:
-  build:                       
-    runs-on: ubuntu-latest 
+  build:
+    name: Run Hello script # ジョブ表示名
+    runs-on: ubuntu-latest # Ubuntu 最新版 VM
+
     steps:
-      - name: Checkout repo 
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set execute bit
+      - name: Ensure execute permission
         run: chmod +x hello.sh
 
-      - name: Run Hello script 
+      - name: Execute Hello script
         run: ./hello.sh
